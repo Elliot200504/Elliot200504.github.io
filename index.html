@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Stuff</title>
+    <meta name="description" content="Games by Elliot Åstrand." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&display=swap" rel="stylesheet" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: 'Cinzel', Georgia, serif;
+        background-color: #12100c;
+        /* Thomas Cole, The Departure (1837). Public domain. */
+        background-image:
+          radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(0, 0, 0, 0.7)),
+          linear-gradient(90deg, rgba(0, 0, 0, 0.3), transparent 35%, transparent 60%, rgba(0, 0, 0, 0.55)),
+          url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Thomas_Cole%2C_The_Departure%2C_1837%2C_NGA_166439.jpg/1920px-Thomas_Cole%2C_The_Departure%2C_1837%2C_NGA_166439.jpg');
+        background-size: cover;
+        background-position: 40% center;
+        background-attachment: fixed;
+      }
+
+      main {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto 1fr auto;
+        padding: clamp(16px, 3vw, 40px);
+      }
+
+      h1 {
+        grid-column: 1;
+        margin: 0;
+        font-size: clamp(34px, 6vw, 72px);
+      }
+
+      footer {
+        grid-column: 1 / -1;
+        font-size: 15px;
+      }
+
+      canvas {
+        image-rendering: pixelated;
+      }
+
+      .pixel-text {
+        position: relative;
+        display: inline-block;
+        font-weight: 900;
+        line-height: 1;
+        white-space: nowrap;
+        color: transparent;
+      }
+
+      .pixel-text canvas {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .menu {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        margin: 0;
+        padding: 0 clamp(0px, 3vw, 48px) 0 0;
+        list-style: none;
+      }
+
+      .globe {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 240px;
+        height: 190px;
+        text-decoration: none;
+        transition: transform 0.15s, filter 0.15s;
+      }
+
+      .globe > svg,
+      .globe > canvas {
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.85));
+      }
+
+      .globe > svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .globe .pixel-text {
+        font-size: 20px;
+      }
+
+      a.globe:hover {
+        transform: scale(1.05);
+        filter: brightness(1.15);
+      }
+
+      .globe.coming-soon > canvas {
+        filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.85)) brightness(0.8);
+      }
+
+      .globe.coming-soon .pixel-text {
+        font-size: 17px;
+      }
+
+      @media (max-width: 700px) {
+        main {
+          grid-template-columns: 1fr;
+        }
+
+        .menu {
+          grid-column: 1;
+          grid-row: 2;
+          align-self: end;
+          align-items: center;
+          padding: 0;
+          margin: 16px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1><span class="pixel-text" data-shrink="4" data-color="gold">MY STUFF</span></h1>
+
+      <ul class="menu">
+        <li>
+          <a class="globe" href="/banner-and-blade/">
+            <svg viewBox="0 6 200 166"><use href="#fire-globe" /></svg>
+            <span class="pixel-text" data-shrink="2.5" data-color="silver">BANNER &amp; BLADE</span>
+          </a>
+        </li>
+        <li>
+          <div class="globe coming-soon">
+            <svg viewBox="0 6 200 166"><use href="#storm-globe" /></svg>
+            <span class="pixel-text" data-shrink="2.5" data-color="gold">COMING SOON...</span>
+          </div>
+        </li>
+        <li>
+          <div class="globe coming-soon">
+            <svg viewBox="0 6 200 166"><use href="#mountain-globe" /></svg>
+            <span class="pixel-text" data-shrink="2.5" data-color="gold">COMING SOON...</span>
+          </div>
+        </li>
+      </ul>
+
+      <footer><span class="pixel-text" data-shrink="2" data-color="gold">Elliot Åstrand</span></footer>
+    </main>
+
+    <svg width="0" height="0" style="position: absolute">
+      <defs id="drawings">
+        <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fff6c0" />
+          <stop offset="0.35" stop-color="#f0c040" />
+          <stop offset="0.7" stop-color="#a8700c" />
+          <stop offset="1" stop-color="#4a2c04" />
+        </linearGradient>
+        <linearGradient id="gold-side" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#6a4208" />
+          <stop offset="0.35" stop-color="#ffe680" />
+          <stop offset="0.65" stop-color="#d8a020" />
+          <stop offset="1" stop-color="#5a3404" />
+        </linearGradient>
+        <radialGradient id="jewel" cx="0.35" cy="0.35" r="0.7">
+          <stop offset="0" stop-color="#ffd0c8" />
+          <stop offset="0.4" stop-color="#e02818" />
+          <stop offset="1" stop-color="#4a0404" />
+        </radialGradient>
+        <radialGradient id="glass-shine" cx="0.35" cy="0.3" r="0.75">
+          <stop offset="0" stop-color="#fff" stop-opacity="0.35" />
+          <stop offset="0.5" stop-color="#fff" stop-opacity="0" />
+          <stop offset="0.85" stop-color="#000" stop-opacity="0" />
+          <stop offset="1" stop-color="#000" stop-opacity="0.55" />
+        </radialGradient>
+        <radialGradient id="fire-glass" cx="0.5" cy="0.6" r="0.6">
+          <stop offset="0" stop-color="#ff9a30" />
+          <stop offset="0.55" stop-color="#8a1a08" />
+          <stop offset="1" stop-color="#1a0402" />
+        </radialGradient>
+        <radialGradient id="flame" cx="0.5" cy="0.8" r="0.8">
+          <stop offset="0" stop-color="#fffbd0" />
+          <stop offset="0.25" stop-color="#ffd040" />
+          <stop offset="0.55" stop-color="#ff7a10" />
+          <stop offset="0.85" stop-color="#c02006" />
+          <stop offset="1" stop-color="#600804" />
+        </radialGradient>
+        <radialGradient id="storm-glass" cx="0.4" cy="0.35" r="0.7">
+          <stop offset="0" stop-color="#e8fff8" />
+          <stop offset="0.25" stop-color="#7ad8c0" />
+          <stop offset="0.6" stop-color="#1e7a7a" />
+          <stop offset="1" stop-color="#062a30" />
+        </radialGradient>
+        <linearGradient id="mountain-sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#04201c" />
+          <stop offset="0.5" stop-color="#1a5a4a" />
+          <stop offset="1" stop-color="#5aa890" />
+        </linearGradient>
+
+        <filter id="flicker" x="-30%" y="-50%" width="160%" height="200%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.05 0.12" numOctaves="2" seed="7" />
+          <feDisplacementMap in="SourceGraphic" scale="16" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+        <filter id="swirl" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="turbulence" baseFrequency="0.06" numOctaves="2" seed="4" />
+          <feDisplacementMap in="SourceGraphic" scale="18" xChannelSelector="R" yChannelSelector="B" />
+        </filter>
+
+        <clipPath id="inside-globe">
+          <circle cx="100" cy="74" r="62" />
+        </clipPath>
+
+        <g id="stand" stroke="#3a2004" stroke-width="2.5" stroke-linejoin="round">
+          <path d="M70 128 C64 140 76 150 92 150 L108 150 C124 150 136 140 130 128 C120 138 80 138 70 128 Z" fill="url(#gold-side)" />
+          <path d="M66 112 C58 124 62 138 74 144 C70 134 70 124 76 116 Z" fill="url(#gold)" />
+          <path d="M134 112 C142 124 138 138 126 144 C130 134 130 124 124 116 Z" fill="url(#gold)" />
+          <path d="M94 150 L106 150 L104 158 L96 158 Z" fill="url(#gold-side)" />
+          <ellipse cx="100" cy="162" rx="20" ry="6" fill="url(#gold-side)" />
+          <circle cx="100" cy="142" r="5" fill="url(#jewel)" />
+        </g>
+
+        <g id="shine">
+          <circle cx="100" cy="74" r="62" fill="url(#glass-shine)" />
+          <ellipse cx="78" cy="44" rx="20" ry="11" fill="#fff" opacity="0.7" />
+          <path d="M148 46 C158 60 160 80 154 98" fill="none" stroke="#fff" stroke-width="4" opacity="0.45" />
+        </g>
+
+        <g id="fire-globe">
+          <circle cx="100" cy="74" r="62" fill="url(#fire-glass)" stroke="#2a0a04" stroke-width="3" />
+          <g clip-path="url(#inside-globe)">
+            <path d="M34 140 C30 100 52 86 52 60 C64 80 70 70 74 44 C86 66 94 62 100 30 C108 60 116 66 128 42 C132 70 140 80 150 60 C154 90 172 104 166 140 Z" fill="url(#flame)" filter="url(#flicker)" />
+            <path d="M58 140 C56 112 72 102 74 84 C84 100 90 96 100 70 C108 96 116 100 126 84 C128 104 144 114 142 140 Z" fill="#fff0a0" opacity="0.9" filter="url(#flicker)" />
+            <ellipse cx="100" cy="112" rx="34" ry="18" fill="#fff" opacity="0.55" filter="url(#flicker)" />
+          </g>
+          <use href="#shine" />
+          <use href="#stand" />
+        </g>
+
+        <g id="storm-globe">
+          <circle cx="100" cy="74" r="62" fill="url(#storm-glass)" stroke="#06262a" stroke-width="3" />
+          <g clip-path="url(#inside-globe)">
+            <path d="M42 92 C58 44 116 32 156 62 C122 54 90 64 74 98 C96 84 134 90 152 114 C116 102 86 114 62 134 Z" fill="#c8fff0" opacity="0.55" filter="url(#swirl)" />
+            <path d="M50 54 C76 28 128 30 150 56 C122 44 86 48 66 72 Z" fill="#2aa890" opacity="0.6" filter="url(#swirl)" />
+          </g>
+          <use href="#shine" />
+          <use href="#stand" />
+        </g>
+
+        <g id="mountain-globe">
+          <circle cx="100" cy="74" r="62" fill="url(#mountain-sky)" stroke="#04140e" stroke-width="3" />
+          <g clip-path="url(#inside-globe)">
+            <path d="M30 60 C60 40 100 52 130 38 C150 30 170 40 176 52 C150 46 130 58 104 60 C80 62 56 54 30 70 Z" fill="#b8e8d4" opacity="0.6" filter="url(#swirl)" />
+            <path d="M40 40 C70 26 110 34 140 22" fill="none" stroke="#d8fff0" stroke-width="6" opacity="0.45" filter="url(#swirl)" />
+            <path d="M30 136 L62 76 L76 94 L102 46 L126 92 L140 74 L172 136 Z" fill="#4a6a62" />
+            <path d="M102 46 L90 70 L98 66 L104 76 L112 66 L116 74 Z" fill="#fff" />
+            <path d="M62 76 L54 92 L62 88 L68 94 Z" fill="#f0f6ff" />
+            <path d="M140 74 L132 90 L140 86 L148 92 Z" fill="#f0f6ff" />
+            <path d="M102 46 L126 92 L140 74 L172 136 L102 136 Z" fill="#1e3430" opacity="0.6" />
+            <path d="M30 128 C60 116 140 116 172 128 L172 140 L30 140 Z" fill="#0e2414" />
+          </g>
+          <use href="#shine" />
+          <use href="#stand" />
+        </g>
+      </defs>
+    </svg>
+
+    <script>
+      const GLOBE_WIDTH = 48
+      const COLOR_STEPS = 7
+
+      const TEXT_COLORS = {
+        gold: ['#fff6c0', '#ffd23a', '#c88a10', '#ffe48a'],
+        silver: ['#ffffff', '#eef0f2', '#a8acb4', '#f4f4f4'],
+      }
+
+      function reduceColors(canvas) {
+        const context = canvas.getContext('2d')
+        const image = context.getImageData(0, 0, canvas.width, canvas.height)
+        const step = 255 / (COLOR_STEPS - 1)
+
+        for (let i = 0; i < image.data.length; i += 4) {
+          image.data[i] = Math.round(image.data[i] / step) * step
+          image.data[i + 1] = Math.round(image.data[i + 1] / step) * step
+          image.data[i + 2] = Math.round(image.data[i + 2] / step) * step
+          image.data[i + 3] = image.data[i + 3] > 100 ? 255 : 0
+        }
+
+        context.putImageData(image, 0, 0)
+      }
+
+      function pixelateGlobe(globe) {
+        const svg = globe.querySelector('svg')
+        const drawings = document.querySelector('#drawings').innerHTML
+        const viewBox = svg.viewBox.baseVal
+        const shownWidth = svg.clientHeight * (viewBox.width / viewBox.height)
+
+        const markup = svg.outerHTML
+          .replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"')
+          .replace('</svg>', '<defs>' + drawings + '</defs></svg>')
+
+        const image = new Image()
+        image.src = 'data:image/svg+xml,' + encodeURIComponent(markup)
+        image.onload = () => {
+          const canvas = document.createElement('canvas')
+          canvas.width = GLOBE_WIDTH
+          canvas.height = Math.round(GLOBE_WIDTH * (viewBox.height / viewBox.width))
+          canvas.style.width = shownWidth + 'px'
+          canvas.style.height = svg.clientHeight + 'px'
+          canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height)
+          reduceColors(canvas)
+          svg.replaceWith(canvas)
+        }
+      }
+
+      function pixelateText(element) {
+        const text = element.textContent
+        const shrink = Number(element.dataset.shrink)
+        const colors = TEXT_COLORS[element.dataset.color]
+        const fontSize = parseFloat(getComputedStyle(element).fontSize) / shrink
+        const font = `900 ${fontSize}px Cinzel`
+        const outline = Math.max(1, Math.round(fontSize * 0.08))
+
+        const canvas = document.createElement('canvas')
+        const context = canvas.getContext('2d')
+        context.font = font
+        canvas.width = Math.ceil(context.measureText(text).width) + outline * 2 + 2
+        canvas.height = Math.ceil(fontSize * 1.25) + outline * 2 + 2
+        canvas.style.width = canvas.width * shrink + 'px'
+        canvas.style.height = canvas.height * shrink + 'px'
+
+        context.font = font
+        context.textBaseline = 'middle'
+        const x = outline + 1
+        const y = canvas.height / 2
+
+        context.lineWidth = outline * 2
+        context.lineJoin = 'round'
+        context.strokeText(text, x, y + 1)
+        context.strokeText(text, x, y)
+
+        const gradient = context.createLinearGradient(0, y - fontSize / 2, 0, y + fontSize / 2)
+        gradient.addColorStop(0, colors[0])
+        gradient.addColorStop(0.45, colors[1])
+        gradient.addColorStop(0.72, colors[2])
+        gradient.addColorStop(1, colors[3])
+        context.fillStyle = gradient
+        context.fillText(text, x, y)
+
+        reduceColors(canvas)
+        element.append(canvas)
+      }
+
+      document.querySelectorAll('.globe').forEach(pixelateGlobe)
+
+      document.fonts.ready.then(() => {
+        document.querySelectorAll('.pixel-text').forEach(pixelateText)
+      })
+    </script>
+  </body>
+</html>
