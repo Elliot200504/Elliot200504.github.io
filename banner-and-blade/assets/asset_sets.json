@@ -1,0 +1,9 @@
+{
+  "default": "classic",
+  "sets": {
+    "classic": {
+      "label": "Classic",
+      "renderer": "legacy"
+    }
+  }
+}

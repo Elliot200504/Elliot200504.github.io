@@ -1,0 +1,34 @@
+{
+  "unit": "hero",
+  "version": 1,
+  "frameSize": [
+    100,
+    145
+  ],
+  "anchor": [
+    31.0,
+    140.75
+  ],
+  "pixelsPerHex": 66,
+  "pixelated": true,
+  "scale": 1.5,
+  "atlasSize": [
+    100,
+    145
+  ],
+  "atlas": "atlas.png",
+  "shadow": "shadow/atlas.png",
+  "teamcolor": "teamcolor_mask/atlas.png",
+  "animations": {
+    "idle": {
+      "fps": 1,
+      "loop": true,
+      "frames": [
+        [
+          0,
+          0
+        ]
+      ]
+    }
+  }
+}
